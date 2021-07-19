@@ -1,5 +1,5 @@
 from rest_framework import serializers 
-from escola.models import Aluno, Curso, Matricula
+from escola.models import Aluno, Curso, Matricula, Anotacao
 
 
 class AlunoSerializer(serializers.ModelSerializer):
@@ -35,3 +35,10 @@ class ListaAlunosMatriculadosSerializer(serializers.ModelSerializer):
     class Meta:
         model  = Matricula 
         fields = ['aluno_nome']
+
+class AnotacaoSerializer(serializers.ModelSerializer):
+    aluno = serializers.ReadOnlyField(source='aluno.nome')
+    curso = serializers.ReadOnlyField(source='curso.descricao')
+    class Meta:
+        model = Anotacao
+        fields=['aluno','curso','titulo', 'conteudo']

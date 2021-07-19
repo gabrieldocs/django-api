@@ -1,7 +1,7 @@
 #from django.http import JsonResponse
 from rest_framework import viewsets, generics
-from escola.models import Aluno, Curso, Matricula 
-from escola.serializer import AlunoSerializer, CursoSerializer, MatriculaSerializer, ListaMatriculasAlunoSerializer, ListaAlunosMatriculadosSerializer
+from escola.models import Aluno, Curso, Matricula, Anotacao
+from escola.serializer import AlunoSerializer, CursoSerializer, MatriculaSerializer, ListaMatriculasAlunoSerializer, ListaAlunosMatriculadosSerializer, AnotacaoSerializer
 from rest_framework.authentication import BasicAuthentication
 from rest_framework.permissions import IsAuthenticated 
 
@@ -43,3 +43,7 @@ class ListaAlunosMatriculados(generics.ListAPIView):
     serializer_class=ListaAlunosMatriculadosSerializer
     authentication_classes = [BasicAuthentication]
     permission_classes= [IsAuthenticated]
+
+class Anotacoes(viewsets.ModelViewSet):
+    queryset=Anotacao.objects.all()
+    serializer_class=AnotacaoSerializer 
